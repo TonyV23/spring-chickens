@@ -21,6 +21,7 @@ public class Club {
     private int id;
     private String title;
     private String content;
+    private String photoUrl;
     @CreationTimestamp
     private LocalDateTime createdOn;
     @UpdateTimestamp

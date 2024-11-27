@@ -30,6 +30,7 @@ public class ClubServiceImpl implements ClubService {
         return ClubDto.builder()
                 .id(club.getId())
                 .title(club.getTitle())
+                .photoUrl(club.getPhotoUrl())
                 .content(club.getContent())
                 .createdOn(club.getCreatedOn())
                 .updatedOn(club.getUpdatedOn())
