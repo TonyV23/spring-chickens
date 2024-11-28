@@ -28,5 +28,11 @@ public class ClubController {
 
     }
 
+    @GetMapping("/clubs/new")
+    public String newClub(Model model) {
+        model.addAttribute("club", new Club());
+        return "clubs-create";
+    }
+
 
 }
