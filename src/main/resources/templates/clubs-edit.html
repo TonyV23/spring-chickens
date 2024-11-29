@@ -26,6 +26,7 @@
                                 placeholder="Enter title"
                                 required
                         >
+                        <p th.if="${#fields.hasErrors('title')}" class="alert alert-danger" th:erros="*{title}"></p>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="content">Content</label>
@@ -38,6 +39,8 @@
                                 placeholder="Enter content"
                                 required
                         >
+                        <p th.if="${#fields.hasErrors('content')}" class="alert alert-danger" th:erros="*{content}"></p>
+
                     </div>
                 </div>
                 <div class="form-group mb-3">
@@ -51,6 +54,7 @@
                             placeholder="Enter photo url"
                             required
                     >
+                    <p th.if="${#fields.hasErrors('photoUrl')}" class="alert alert-danger" th:erros="*{photoUrl}"></p>
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>

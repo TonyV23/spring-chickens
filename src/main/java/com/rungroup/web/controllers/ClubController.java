@@ -3,9 +3,11 @@ package com.rungroup.web.controllers;
 import com.rungroup.web.dto.ClubDto;
 import com.rungroup.web.models.Club;
 import com.rungroup.web.service.ClubService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +40,11 @@ public class ClubController {
     }
 
     @PostMapping("/clubs/new")
-    public String newClub(@ModelAttribute("club") Club club) {
+    public String newClub(@Valid @ModelAttribute("club") Club club, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("club", club);
+            return "clubs-create";
+        }
         clubService.saveClub(club);
         return "redirect:/clubs";
     }
@@ -51,7 +57,10 @@ public class ClubController {
     }
 
     @PostMapping("/clubs/{clubId}/edit")
-    public String updateClub(@PathVariable int clubId, @ModelAttribute("club") ClubDto club) {
+    public String updateClub(@PathVariable int clubId,@Valid @ModelAttribute("club") ClubDto club, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "clubs-edit";
+        }
         club.setId(clubId);
         clubService.updateClub(club);
         return "redirect:/clubs";
